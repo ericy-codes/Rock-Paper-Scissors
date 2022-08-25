@@ -12,19 +12,52 @@ function getPlayerChoice(){
     return playerSelection;
 }
 
+// A function to play one round of game
 function playRound(playerSelection, computerSelection){
     playerSelection = getPlayerChoice();
     computerSelection = getComputerChoice();
 
     // Compare Computer Choice & Player Choice
     if (playerSelection === computerSelection){
-        return 'No winner.';
+        let result = 'tie';
+        console.log('No winner.');
+        return result
     } else if ((playerSelection === 'SCISSORS' && computerSelection === 'ROCK') ||
                 (playerSelection === 'ROCK' && computerSelection === 'PAPER') ||
                 (playerSelection === 'PAPER' && computerSelection === 'SCISSORS')){
-                    return 'You lose! ' + computerSelection + ' beats ' + playerSelection;
+                    console.log('You lose! ' + computerSelection + ' beats ' + playerSelection);
+                    let result = 'playerLose';
+                    return result;
     } else {
-        return 'You win! ' + playerSelection + ' beats ' + computerSelection;
+        console.log('You win! ' + playerSelection + ' beats ' + computerSelection);
+        let result = 'playerWin';
+        return result;
     }
 }
 
+//A function to play 5 rounds and keeps score
+function game(){
+    let playerScore = 0;
+    let computerScore = 0;
+    
+    for (let i = 0; i < 5; i++){
+        let gameResult = playRound();
+
+        if (gameResult === 'playerWin'){
+            playerScore++;
+            console.log('Player Score: '+ playerScore.toString());
+        } else if (gameResult === 'playerLose'){
+            computerScore++;
+            console.log('Computer Score: '+ computerScore.toString());
+        } else {
+        }
+    }
+
+    if (playerScore > computerScore){
+        console.log('Player wins! Player Score: ' + playerScore.toString() + ' | Computer Score: ' + computerScore.toString());
+    } else if (computerScore > playerScore){
+        console.log('Computer wins! Player Score: ' + playerScore.toString() + ' | Computer Score: ' + computerScore.toString());
+    } else {
+        console.log('Tie game.');
+    }
+}
