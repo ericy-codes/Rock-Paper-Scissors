@@ -14,28 +14,29 @@ function getPlayerChoice(){
 
 // A function to play one round of game
 function playRound(playerSelection, computerSelection){
-    playerSelection = getPlayerChoice();
+
     computerSelection = getComputerChoice();
 
     // Compare Computer Choice & Player Choice
     if (playerSelection === computerSelection){
         let result = 'tie';
-        console.log('No winner.');
+        addResult.textContent += 'No winner.';
         return result
-    } else if ((playerSelection === 'SCISSORS' && computerSelection === 'ROCK') ||
-                (playerSelection === 'ROCK' && computerSelection === 'PAPER') ||
-                (playerSelection === 'PAPER' && computerSelection === 'SCISSORS')){
-                    console.log('You lose! ' + computerSelection + ' beats ' + playerSelection);
+    } else if ((playerSelection === 'Scissors' && computerSelection === 'Rock') ||
+                (playerSelection === 'Rock' && computerSelection === 'Paper') ||
+                (playerSelection === 'Paper' && computerSelection === 'Scissors')){
+                    addResult.textContent += 'You lose! ' + computerSelection + ' beats ' + playerSelection;
                     let result = 'playerLose';
                     return result;
     } else {
-        console.log('You win! ' + playerSelection + ' beats ' + computerSelection);
+        addResult.textContent += 'You win! ' + playerSelection + ' beats ' + computerSelection;
         let result = 'playerWin';
         return result;
     }
 }
 
 //A function to play 5 rounds and keeps score
+/*
 function game(){
     let playerScore = 0;
     let computerScore = 0;
@@ -60,4 +61,17 @@ function game(){
     } else {
         console.log('Tie game.');
     }
-}
+}*/
+
+const rockSelect = document.querySelector('#rock');
+rockSelect.onclick = () => playRound('Rock', getComputerChoice());
+
+const paperSelect = document.querySelector('#paper');
+paperSelect.onclick = () => playRound('Paper', getComputerChoice());
+
+const scissorsSelect = document.querySelector('#scissors');
+scissorsSelect.onclick = () => playRound('Scissors', getComputerChoice());
+
+const addResult = document.querySelector('#results');
+
+const newPara = document.createElement('p');
